@@ -74,10 +74,15 @@ Push to `main`
 ## 📁 Project Structure
 
 .
+
 ├── .github/workflows/main.yml   # CI/CD pipeline
+
 ├── api/index.py                 # FastAPI app (Vercel entry)
+
 ├── tests/test_health.py         # PyTest suite
+
 ├── requirements.txt             # dependencies
+
 └── vercel.json                  # Vercel config
 
 
