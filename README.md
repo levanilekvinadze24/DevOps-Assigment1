@@ -1,29 +1,30 @@
 ## Assignment 1 — CI/CD Pipeline Automation & Deployment Strategies
 
 ### Live application
-- **URL**: (paste your Vercel production URL here after first deploy)
+- **URL**: `https://dev-ops-assigment1.vercel.app`
 
-### Screenshots (add images)
-- Hosted application screenshot
-- GitHub Actions successful run screenshot
+### Screenshots
+- **Hosted application**
+  <img width="468" height="126" alt="image" src="https://github.com/user-attachments/assets/24d7faf6-6454-439f-8509-9bf2ccbfa9b4" />
+
+
+- **GitHub Actions (successful run)**
+  <img width="1813" height="738" alt="image" src="https://github.com/user-attachments/assets/8434a96d-b7d9-4e0b-b846-3174965d8a10" />
+
+
 
 ### Pipeline description
-- **CI**: On every `push` / `pull_request`, GitHub Actions installs dependencies and runs `pytest`. If tests fail, the pipeline stops.
-- **CD**: On push to `main` (only after CI passes), GitHub Actions deploys to Vercel using the Vercel CLI.
+- **CI**: GitHub Actions runs on every `push` and `pull_request` to `main`, installs dependencies, then runs `python -m pytest -q`. If tests fail, the workflow stops.
+- **CD**: Only if CI succeeds (and only on push to `main`), GitHub Actions deploys to Vercel using `vercel deploy --prod`.
 
-### Update strategy (chosen)
-- **Strategy**: Blue-Green (simulated)
+### Strategy explanation
+- **Update strategy**: Blue-Green (simulated)
 - **How it’s applied**:
-  - `main` is treated as **production** (auto-deployed).
-  - Pull Requests act as the **safe validation gate** (tests must pass).
-  - (Optional) Create a `staging` branch and deploy it to a separate Vercel project for a true Blue-Green environment split.
+  - `main` acts as **production** (auto-deployed after tests pass).
+  - PRs act as the **safe gate** before merging to production.
+  - (Optional) A separate `staging` branch/project can be used for a true Blue-Green split.
 
 ### Rollback guide (Vercel)
-Option A (recommended): Roll back to a previous deployment
-- Open Vercel dashboard → your project → **Deployments**
-- Pick the last stable deployment → **Promote to Production**
-
-Option B: Roll back via Git
-- Revert the bad commit in GitHub (or reset to a known good commit) and push to `main`
-- CI runs tests → CD redeploys the last stable code
-
+- Go to Vercel dashboard → Project → **Deployments**
+- Select the last stable deployment → **Promote to Production**
+- (Alternative) Revert the bad commit in GitHub and push to `main` to redeploy the previous stable code through the pipeline.
