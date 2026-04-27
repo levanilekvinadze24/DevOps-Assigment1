@@ -5,5 +5,5 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"status": "OK", "service": "DevOps-Assigment1"}
+    return {"status": "ok", "service": "DevOps-Assigment1"}
 
